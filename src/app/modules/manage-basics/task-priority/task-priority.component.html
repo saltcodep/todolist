@@ -1,0 +1,38 @@
+<div class="row row-cols-2">
+    <h3 class="col-10">ระดับ</h3>
+    <div class="col-2">
+        <button class="btn float-end btn-primary" [routerLink]="'add'" ><span class=" fa fa-plus me-2"></span>เพิ่มรายการ</button>
+    </div>
+</div>
+<table class = "table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ชื่อ</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let priority of prioritys">
+            <td (click)="viewPriority(priority.priorityId)">{{priority.priorityName}}</td>
+            <td class="col-2 text-center">
+                <a class="btn btn-warning me-2" (click)="editPriority(priority.priorityId)">
+                    <span class="fa fa-pencil-square-o" ></span>
+                </a>
+                <a class="btn btn-danger" (click)="deletePriority(priority.priorityId, template)" *ngIf="priority.countPriority==0">
+                    <span class="fa fa-trash-o"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>คุณต้องการที่จะลบ?</p>
+        <button class="btn btn-danger me-2" (click)="confirmDeletePriority()">
+            ลบ
+        </button>
+        <button class="btn btn-light" (click)="deleteModel.hide()">
+            ยกเลิก
+        </button>
+    </div>
+</ng-template>

@@ -1,0 +1,49 @@
+<h3>ประเภท</h3>
+<Form [formGroup]="typeFormGroup" (ngSubmit)="addTypeOrEditType()">
+    <div class="row m-2">
+        <div class="col-12 mb-2">
+            ชื่อ: <input type="text" formControlName="typeName" class="form-control"
+                [ngClass]="{ 'is-invalid': submit && typeName.errors }">
+        </div>
+        <div class="col-12 mb-2">
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="checkbox" formControlName="active">
+                <label class="form-check-label" for="flexSwitchCheckDefault">เปิด/ปิด</label>
+            </div> -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexRadioDefault1" value="A" formControlName="active">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    ใช้งาน
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexRadioDefault2" value="I" formControlName="active">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    ไม่ใช้งาน
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center" *ngIf="mode =='edit' || mode =='add'">
+            <button type="submit" class="btn btn-primary me-2">
+                <span class="fa fa-info-circle"></span>
+                บันทึก
+            </button>
+            <a class="btn btn-outline-secondary" (click)="back()">
+                <span class="fa fa-times"></span>
+                ย้อนกลับ
+            </a>
+        </div>
+        <div class="text-center" *ngIf="mode == 'view'">
+            <a class="btn btn-warning me-2" (click)="editType()">
+                <span class="fa fa-pencil-square-o"></span>
+                แก้ไขข้อมูล
+            </a>
+            <a class="btn" (click)="back()">
+                <span class="fa fa-times"></span>
+                ย้อนกลับ
+            </a>
+        </div>
+    </div>
+</Form>

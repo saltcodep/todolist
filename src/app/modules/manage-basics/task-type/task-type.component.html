@@ -1,0 +1,39 @@
+<h3>ประเภท</h3>
+<button type="button" class="btn float-end btn-primary" [routerLink]="'add'"><span
+        class="fa fa-plus me-2"></span>เพิ่มรายการ</button>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ชื่อ</th>
+            <th>ใช้งาน/ไม่ใช้งาน</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let type of types">
+            <td (click)="viewType(type.typeId)">{{type.typeName}}</td>
+            <td (click)="viewType(type.typeId)" *ngIf="type.active=='A'">ใช้งาน</td>
+            <td (click)="viewType(type.typeId)" *ngIf="type.active=='I'" class="pe-auto">ไม่ใช้งาน</td>
+            <td class="col-2 text-center">
+                <a class="btn btn-warning me-2" (click)="editType(type.typeId)">
+                    <span class="fa fa-pencil-square-o"></span>
+                </a>
+                <a class="btn btn-danger" (click)="deleteType(type.typeId, template)"
+                    *ngIf="type.taskFormDtos.length==0">
+                    <span class="fa fa-trash-o"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>คุณต้องการที่จะลบ?</p>
+        <button type="button" class="btn btn-danger me-2" (click)="confirmDeleteType()">
+            ลบ
+        </button>
+        <button type="button" class="btn btn-light" (click)="deleteModal.hide()">
+            ยกเลิก
+        </button>
+    </div>
+</ng-template>

@@ -1,0 +1,41 @@
+<h3>สถานะ</h3>
+<Form [formGroup]="statusFormGroup" (ngSubmit)="addStatusOrEditStatus()">
+    <div class="row m-2">
+        <div class="col-12 mb-2">
+            ชื่อ:
+            <input type="text" class="form-control" formControlName="statusName">
+        </div>
+        <div class="col-12 mb-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexRadioDefault1" value="A" formControlName="active">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    ใช้งาน
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexRadioDefault2" value="I" formControlName="active">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    ไม่ใช้งาน
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center" *ngIf="mode =='add' || mode=='edit'">
+            <button type="submit" class="btn btn-primary me-2">
+                บันทึก
+            </button>
+            <a class="btn btn-secondary" (click)="back()">
+                ย้อนกลับ
+            </a>
+        </div>
+        <div class="text-center" *ngIf="mode =='view'">
+            <a class="btn btn-warning me-2" (click)="editStatus()">
+                แก้ไขข้อมูล
+            </a>
+            <a class="btn btn-secondary" (click)="back()">
+                ย้อนกลับ
+            </a>
+        </div>
+    </div>
+</Form>

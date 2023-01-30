@@ -1,0 +1,176 @@
+<form [formGroup]="searchForm" (ngSubmit)="searchTask()">
+    <div class="row">
+        <div class="col-md-8 offset-md-1 mt-2">
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <span class="text-end col-md-6">
+                            <label>
+                                <span>ประเภท</span>
+                                <span>:</span>
+                            </label>
+                        </span>
+                        <div class="col-md-6">
+                            <ng-select placeholder="ประเภท" [searchable]="false" [clearable]="false" [items]="types"
+                                bindLabel="typeName" bindValue="typeId" formControlName="type">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <span class="text-end col-md-6">
+                            <label>
+                                <span>หัวข้อ</span>
+                                <span>:</span>
+                            </label>
+                        </span>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="" formControlName="name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <span class="text-end col-md-6">
+                            <label>
+                                <span>วันที่ประกาศ</span>
+                                <span>:</span>
+                            </label>
+                        </span>
+                        <div class="col-md-6">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" formControlName="date"
+                                    placeholder="วันที่ประกาศ" bsDatepicker useUtc="true" />
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-light d-block">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <span class="text-end col-md-6">
+                            <label>
+                                <span>สถานะ</span>
+                                <span>:</span>
+                            </label>
+                        </span>
+                        <div class="col-md-6">
+                            <ng-select placeholder="สถานะ" [searchable]="false" [clearable]="false" [items]="statuses"
+                                bindLabel="statusName" bindValue="statusId" formControlName="status">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary m-1">
+            <span class="fa fa-search m-1"></span>
+            <span>ค้นหา</span>
+        </button>
+        <button type="button" class="btn btn-default" (click)="cleanTask()">
+            <span class="fa fa-refresh m-1"></span>
+            <span>ล้างข้อมูล</span>
+        </button>
+    </div>
+</form>
+<div class="dataTables_wrapper">
+    <div class="top">
+        <div class="dataTables_info" *ngIf="total==0">ผลการค้นหาทั้งหมด 0 รายการ</div>
+        <div class="dataTables_info" *ngIf="total>0">ผลการค้นหาทั้งหมด {{total}} รายการ (แสดงรายการที่ {{ page == 1 ? 1
+            : (page -1) * results +1}} ถึง
+            {{page== 1 ? (1 + tasks.length - 1)
+            : ((page -1) * results +1)+ tasks.length - 1}})</div>
+        <div class="dataTables_length">
+            <label>
+                แสดงหน้าละ
+                <select [(ngModel)]="results" (change)="resultsChange($event)">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                รายการ
+            </label>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered table-hover dataTable no-footer">
+        <thead>
+            <tr>
+                <th>Name List</th>
+                <th>Target Date</th>
+                <th>Update Date</th>
+                <th>User Update</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <td (click)="viewTask(task.taskId)">{{task.name}}</td>
+                <td (click)="viewTask(task.taskId)">{{task.targetDate | dateTh}}</td>
+                <td (click)="viewTask(task.taskId)">{{task.updateDate | dateTh:'fulldate'}}</td>
+                <td (click)="viewTask(task.taskId)">{{task.userByUpdateBy}}</td>
+                <td (click)="viewTask(task.taskId)">{{task.type?.typeName}}</td>
+                <td (click)="viewTask(task.taskId)">
+                    <div [ngClass]="{
+                                        'badge': task.status,
+                                        'bg-warning text-dark': task.status.statusId == 1,
+                                        'bg-primary': task.status.statusId == 2,
+                                        'bg-success': task.status.statusId == 3
+                                    }">
+                        {{task.status.statusName}}
+                    </div>
+                </td>
+                <td class="text-center">
+                    <a (click)="editTask(task.taskId)" class="btn btn-warning me-2">
+                        <span class="fa fa-pencil-square-o"></span>
+                    </a>
+                    <a (click)="openModalDelete(template)" class="btn btn-danger">
+                        <span class="fa fa-trash-o"></span>
+                    </a>
+                    <ng-template #template>
+                        <div class="modal-body text-center">
+                            <p>คุณต้องการที่จะยืนยัน?</p>
+                            <button type="button" class="btn btn-default me-2"
+                                (click)="confirm(task.taskId)">ตกลง</button>
+                            <button type="button" class="btn btn-primary" (click)="modalRef?.hide()">ยกเลิก</button>
+                        </div>
+                    </ng-template>
+                </td>
+            </tr>
+            <tr class="text-center" *ngIf="tasks.length==0">
+                <td colspan="7">ไม่พบข้อมูล</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="bottom">
+        <pagination class="dataTables_paginate" previousText="ย้อนกลับ" nextText="ถัดไป" firstText="หน้าแรก"
+            lastText="หน้าสุดท้าย" [totalItems]="total" (pageChanged)="pageChanged($event)" [boundaryLinks]="true"
+            [itemsPerPage]="results">
+        </pagination>
+    </div>
+    <div class="clearfix dataTable-tailing">
+        <div class="left">
+            <div class="btn btn-text">
+                <span class="fa fa-trash"></span>
+                ลบทั้งหมด
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn-group-add">
+    <a type="button" class="btn btn-add" routerLink="/todo/add">
+        <span class="fa fa-plus"></span>
+    </a>
+</div>

@@ -1,0 +1,163 @@
+.btn .fa {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+    border-bottom: 1px solid #178acc;
+    color: #ffffff;
+    background-color: #2fa4e7;
+    border-color: #2fa4e7;
+}
+
+.card-custom .card-header .card-title i{
+    top: 3px;
+    position: relative;
+    margin-right: 3px;
+}
+
+.btn {
+    font-size: 18px;
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group .col-md-6{
+    position: relative;
+    min-height: 1px;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    clear: both;
+    float: left;
+    padding-top: 0.755em;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: right;
+}
+
+.dataTables_wrapper .dataTables_length label {
+    font-weight: normal;
+}
+
+.dataTables_length select {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+    font-size: 20px;
+    height: 28px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.table.dataTable thead th, table.dataTable thead td, .table.dataTable.no-footer {
+    border: 1px solid #dddddd;
+}
+
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+    max-width: 100%;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled{
+    cursor: default;
+    color: #666 !important;
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0.5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333 !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 6px 6px;
+}
+
+.left {
+    float: left;
+}
+
+.btn-text {
+    border: none;
+    background: none;
+}
+
+.btn-group-add{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999px;
+}
+
+.btn.btn-add{
+    background-color: #db4437;
+    height: 66px;
+    bottom: 10px;
+    right: 10px;
+    width: 66px;
+    box-shadow: 0 0 4px rgb(0 0 0 / 14%), 0 4px 8px rgb(0 0 0 / 28%);
+    box-sizing: content-box;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    position: relative;
+    transform: scale(1) rotate(360deg);
+    border: none;
+    border-radius: 50%;
+}
+
+.btn-group-add .btn.btn-add span{
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 16px;
+    margin-left: 3px;
+}
+
+table tbody{
+    cursor: pointer;
+}

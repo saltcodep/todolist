@@ -1,0 +1,111 @@
+<Form (ngSubmit)="addTask()" [formGroup]="taskGroup">
+    <div class="row">
+        <div class="col-md-11">
+            <div class="row form-group">
+                <span class="col-md-2 text-end">
+                    <label>
+                        ประเภท:
+                    </label>
+                </span>
+                <div class="col-md-10">
+                    <ng-select
+                        [ngClass]="{ 'is-invalid': taskType.invalid && (taskType.dirty || taskType.touched || submit) }"
+                        placeholder="ประเภท" [searchable]="false" [items]="types" [clearable]="false"
+                        bindLabel="typeName" bindValue="typeId" formControlName="taskType">
+                    </ng-select>
+                    <span class="text-danger" *ngIf="(taskType.touched || submit) && taskType.errors?.['required']">
+                        เลื่อก
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="col-md-2 text-end">
+                    <label>
+                        ห้วข้อ:
+                    </label>
+                </span>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" formControlName="taskName" placeholder="ห้วข้อ"
+                        [ngClass]="{ 'is-invalid': submit && taskName.errors }">
+                    <span class="text-danger" *ngIf="(taskName.touched || submit) && taskName.errors?.['required']">
+                        ใส้ชื่อ
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="col-md-2 text-end">
+                    <label>
+                        วันที่ประกาศ:
+                    </label>
+                </span>
+                <div class="col-md-10">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" formControlName="targetDate" placeholder="วันที่ประกาศ"
+                            bsDatepicker [ngClass]="{ 'is-invalid': submit && targetDate.errors }">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-light d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+                    <span class="text-danger" *ngIf="(targetDate.touched || submit) && targetDate.errors?.['required']">
+                        เลื่อก
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="col-md-2 text-end">
+                    <label>
+                        สถานะ:
+                    </label>
+                </span>
+                <div class="col-md-10">
+                    <ng-select
+                        [ngClass]="{ 'is-invalid': taskStatus.invalid && (taskStatus.dirty || taskStatus.touched || submit) }"
+                        placeholder="สถานะ" [searchable]="false" [clearable]="false" [items]="statuses"
+                        bindLabel="statusName" bindValue="statusId" formControlName="taskStatus"></ng-select>
+                    <span class="text-danger" *ngIf="(taskStatus.touched || submit) && taskStatus.errors?.['required']">
+                        เลื่อก
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="col-md-2 text-end">
+                    <label>
+                        ระดับ:
+                    </label>
+                </span>
+                <div class="col-md-10">
+                    <ng-select
+                        [ngClass]="{ 'is-invalid': taskPriority.invalid && (taskPriority.dirty || taskPriority.touched || submit) }"
+                        placeholder="ระดับ" [searchable]="false" [clearable]="false" [items]="priorities"
+                        bindLabel="priorityName" bindValue="priorityId" formControlName="taskPriority"></ng-select>
+                    <span class="text-danger"
+                        *ngIf="(taskPriority.touched || submit) && taskPriority.errors?.['required']">
+                        เลื่อก
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" *ngIf="mode =='edit' || mode =='add'">
+        <button type="submit" class="btn btn-primary me-2">
+            <span class="fa fa-info-circle"></span>
+            บันทึก
+        </button>
+        <a class="btn" (click)="back()">
+            <span class="fa fa-times"></span>
+            ยกเลิก
+        </a>
+    </div>
+    <div class="text-center" *ngIf="mode == 'view'">
+        <button class="btn btn-warning me-2" (click)="editTask(id)">
+            <span class="fa fa-info-circle"></span>
+            แก้ไขข้อมูล
+        </button>
+        <a class="btn" (click)="back()">
+            <span class="fa fa-times"></span>
+            ย้อนกลับ
+        </a>
+    </div>
+</Form>

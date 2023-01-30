@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <i class="fa fa-database me-2"></i>
+            <span>จัดการข้อมูลพืนฐาน</span>
+        </div>
+        <div class="box-icon">
+            <a type="button" class="btn btn-default rounded-pill" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </div>
+    </div>
+    <div class="card-body" [collapse]="isCollapsed" [isAnimated]="true">
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group">
+                    <button type="button" class="list-group-item text-start" [routerLink]="'task-type'"
+                        routerLinkActive="active">ประเภท</button>
+                    <button type="button" class="list-group-item text-start" [routerLink]="'task-status'"
+                        routerLinkActive="active">สถานะ</button>
+                    <button type="button" class="list-group-item text-start" [routerLink]="'task-priority'"
+                        routerLinkActive="active">ระดับ</button>
+                </div>
+            </div>
+            <div class="col-8">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
